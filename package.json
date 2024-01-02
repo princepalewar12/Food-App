@@ -1,0 +1,33 @@
+{
+  "name": "food-app",
+  "version": "1.0.0",
+  "description": "Food delivery App.",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/princepalewar12/Food-App.git"
+  },
+  "keywords": [
+    "react",
+    "javascript"
+  ],
+  "author": "Prince Palewar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/princepalewar12/Food-App/issues"
+  },
+  "homepage": "https://github.com/princepalewar12/Food-App#readme",
+  "devDependencies": {
+    "parcel": "^2.10.3",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "browserslist":[
+    "last 2 versions"
+  ]
+}
