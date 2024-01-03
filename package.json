@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "Food delivery App.",
   "scripts": {
+    "start": " parcel index.html",
+    "build": "parcel build index.html",
     "test": "jest"
   },
   "repository": {
@@ -20,6 +22,7 @@
   },
   "homepage": "https://github.com/princepalewar12/Food-App#readme",
   "devDependencies": {
+    "buffer": "^6.0.3",
     "parcel": "^2.10.3",
     "process": "^0.11.10"
   },
@@ -27,7 +30,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
-  "browserslist":[
+  "browserslist": [
     "last 2 versions"
   ]
 }
