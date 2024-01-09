@@ -6,9 +6,12 @@ import Shimmer from "./shimmer";
 const Body = () => {
   // local state variable - super powerful variable
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
-  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+  const [filteredRestaurants, setFilteredRestaurants] = useState([]);  
 
   const [searchText, setSearchText] = useState("");
+
+  // whenever state variable update, react triggers a reconciliation cycle(re-renders the component)
+  console.log("Body Rendered");
 
   useEffect(() => {
     fetchData();
@@ -20,6 +23,7 @@ const Body = () => {
     const json = await data.json();
     // console.log(json);
 
+    // optional chaining
     setListOfRestaurants(
       json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
@@ -41,9 +45,11 @@ const Body = () => {
           className="filter-btn"
           onClick={() => {
             const filteredList = listOfRestaurants.filter(
-              (res) => res.info.avgRating > 4.2
-            );
-            setListOfRestaurants(filteredList);
+              (res) => {res.info.avgRating >= 4.5
+              }
+              
+              );
+              setListOfRestaurants(filteredList) 
             console.log(`button clicked`);
           }}
         >
@@ -76,7 +82,7 @@ const Body = () => {
           >
             Search
           </button>
-        </div>
+        </div> 
       </div>
       <div className="res-container">
         {filteredRestaurants.map((restaurants) => (
