@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 // import resList from "../ulits/mockData";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./shimmer";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   // local state variable - super powerful variable
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
-  const [filteredRestaurants, setFilteredRestaurants] = useState([]);  
+  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 
   const [searchText, setSearchText] = useState("");
 
@@ -44,12 +45,10 @@ const Body = () => {
         <button
           className="filter-btn"
           onClick={() => {
-            const filteredList = listOfRestaurants.filter(
-              (res) => {res.info.avgRating >= 4.5
-              }
-              
-              );
-              setListOfRestaurants(filteredList) 
+            const filteredList = listOfRestaurants.filter((res) => {
+              res.info.avgRating >= 4.5;
+            });
+            setListOfRestaurants(filteredList);
             console.log(`button clicked`);
           }}
         >
@@ -74,7 +73,6 @@ const Body = () => {
                 res?.info?.name
                   ?.toLowerCase()
                   .includes(searchText.toLowerCase())
-                  
               );
 
               setFilteredRestaurants(filteredRestaurant);
@@ -82,12 +80,17 @@ const Body = () => {
           >
             Search
           </button>
-        </div> 
+        </div>
       </div>
       <div className="res-container">
         {filteredRestaurants.map((restaurants) => (
-          <RestaurantCard key={restaurants.info.id} resData={restaurants} />
-        ))}
+          <Link
+            key={restaurants.info.id}
+             to={"/restaurant/" + restaurants.info.id}
+          >
+            <RestaurantCard resData={restaurants} />
+          </Link>
+       ))}     
       </div>
     </div>
   );
