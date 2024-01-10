@@ -1,14 +1,13 @@
 import { useState } from "react";
 import { LOGO_URL } from "../ulits/contants";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../ulits/useOnlineStatus";
 
 const Header = () => {
   const [btnName, setBtnName] = useState("LOGIN");
-  // let btnName = "Login";
-  // const btnChange=()=>{
-  //    setBtnName(btnName = "Logout");
-  //    console.log(btnName);
-  // }
+
+  const onlineStatus = useOnlineStatus(); 
+
   return (
     <div className="header">
       <div className="logo-container">
@@ -16,7 +15,8 @@ const Header = () => {
       </div>
       <div className="nav-items">
         <ul>
-          <li><Link to="/">Home</Link></li> 
+          <li>Online Status: {onlineStatus ? "🟩": "🟥"}</li>
+          <li><Link to="/">Home</Link></li>  
           <li><Link to="/about">About Us</Link></li> 
           <li><Link to="/contact">Contact Us</Link></li> 
           

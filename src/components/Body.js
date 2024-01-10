@@ -3,11 +3,13 @@ import { useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../ulits/useOnlineStatus";
 
 const Body = () => {
   // local state variable - super powerful variable
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+  const[topRestaurants, setTopRestaurants] = useState([])
 
   const [searchText, setSearchText] = useState("");
 
@@ -22,16 +24,23 @@ const Body = () => {
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=30.3164945&lng=78.03219179999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
-    // console.log(json);
+    console.log(json);
 
     // optional chaining
     setListOfRestaurants(
-      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
     setFilteredRestaurants(
-      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
+    setTopRestaurants(
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   };
+
+  const onlineStatus = useOnlineStatus();
+
+  if(onlineStatus === false) return <h1>Looks like you are Offline!! Please check your internet</h1>
 
   // conditional rendering
   // if(listOfRestaurants.length === 0) {
@@ -45,18 +54,16 @@ const Body = () => {
         <button
           className="filter-btn"
           onClick={() => {
-            const filteredList = listOfRestaurants.filter((res) => {
-              res.info.avgRating >= 4.5;
-            });
-            setListOfRestaurants(filteredList);
-            console.log(`button clicked`);
+            const filteredList = topRestaurants.filter((res) => res.info.avgRating >= 4.3);
+            setFilteredRestaurants(filteredList);
+            // console.log(`button clicked`);
           }}
         >
           Top Rated Restaurants
         </button>
         <div className="search-container">
           <input
-            type="text"
+            type="text" 
             className="search-box"
             value={searchText}
             onChange={(e) => {
