@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { MENU_API } from "../ulits/contants";
+import { MENU_API } from "../ulits/constants";
 
 
 const useRestaurantMenu = (resId)=>{

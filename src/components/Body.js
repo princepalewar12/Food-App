@@ -9,7 +9,7 @@ const Body = () => {
   // local state variable - super powerful variable
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
-  const[topRestaurants, setTopRestaurants] = useState([])
+  const [topRestaurants, setTopRestaurants] = useState([]);
 
   const [searchText, setSearchText] = useState("");
 
@@ -40,7 +40,8 @@ const Body = () => {
 
   const onlineStatus = useOnlineStatus();
 
-  if(onlineStatus === false) return <h1>Looks like you are Offline!! Please check your internet</h1>
+  if (onlineStatus === false)
+    return <h1>Looks like you are Offline!! Please check your internet</h1>;
 
   // conditional rendering
   // if(listOfRestaurants.length === 0) {
@@ -50,28 +51,32 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="body">
-      <div className="filter">
-        <button
-          className="filter-btn"
-          onClick={() => {
-            const filteredList = topRestaurants.filter((res) => res.info.avgRating >= 4.3);
-            setFilteredRestaurants(filteredList);
-            // console.log(`button clicked`);
-          }}
-        >
-          Top Rated Restaurants
-        </button>
-        <div className="search-container">
+      <div className="flex">
+        <div className="m-4 p-4 flex item-center justify-center ">
+          <button
+            className="px-4 py-2 bg-gray-100 rounded-lg border border-emerald-950 "
+            onClick={() => {
+              const filteredList = topRestaurants.filter(
+                (res) => res.info.avgRating >= 4.3
+              );
+              setFilteredRestaurants(filteredList);
+              // console.log(`button clicked`);
+            }}
+          >
+            Top Rated Restaurants
+          </button>
+        </div>
+        <div className="search m-1 p-3">
           <input
-            type="text" 
-            className="search-box"
+            type="text"
+            className="px-4 py-2 border rounded-lg border-solid border-black"
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value);
             }}
           />
           <button
-            className="search-btn"
+            className="px-4 py-2 bg-green-100 m-4 rounded-lg border border-emerald-950"
             onClick={() => {
               // filter the restaurant cards and update the UI
               // searchText
@@ -89,15 +94,15 @@ const Body = () => {
           </button>
         </div>
       </div>
-      <div className="res-container">
+      <div className="flex flex-wrap m-3 p-3 justify-center">
         {filteredRestaurants.map((restaurants) => (
           <Link
             key={restaurants.info.id}
-             to={"/restaurant/" + restaurants.info.id}
+            to={"/restaurant/" + restaurants.info.id}
           >
             <RestaurantCard resData={restaurants} />
           </Link>
-       ))}     
+        ))}
       </div>
     </div>
   );
