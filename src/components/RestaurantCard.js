@@ -6,9 +6,10 @@ const RestaurantCard = (props) => {
     resData?.info;
   const { deliveryTime } = resData?.info?.sla;
   return (
-    <div className=" rounded-lg my-3 mx-9 pt-2 px-3 w-[250px] h-[500px] bg-gray-100 hover:bg-slate-200" style={{ backgroundColor: "#f0f0f0" }}>
+    <div className=" rounded-lg my-3 mx-9 pt-2 px-3 w-[250px] h-[500px] hover:border-2">
       <img
         className="rounded-lg"
+        style={{width: "100%",height:"200px"}}
         src={CDN_URL + cloudinaryImageId}
         alt="res-photo"
       />
@@ -20,5 +21,19 @@ const RestaurantCard = (props) => {
     </div>
   );
 };
+
+// Higher Order Component
+// Input - RestaurantCard ==> RestaurantCardPromoted
+
+export const withPromotedLabel =(RestaurantCard)=>{
+  return (props) =>{
+    return (  
+      <div>
+        <label className="absolute bg-black text-white m-2 p-2 rounded-lg">promoted</label>
+        <RestaurantCard {...props}/>
+      </div>
+    )
+  }
+}
 
 export default RestaurantCard;

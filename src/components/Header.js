@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import useOnlineStatus from "../ulits/useOnlineStatus";
 
 const Header = () => {
-  const [btnName, setBtnName] = useState("LOGIN");
+  const [btnName, setBtnName] = useState("Login");
 
   const onlineStatus = useOnlineStatus();
 

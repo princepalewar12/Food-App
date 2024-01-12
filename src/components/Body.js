@@ -4,6 +4,7 @@ import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../ulits/useOnlineStatus";
+import { withPromotedLabel } from "./RestaurantCard";
 
 const Body = () => {
   // local state variable - super powerful variable
@@ -13,8 +14,10 @@ const Body = () => {
 
   const [searchText, setSearchText] = useState("");
 
+  const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
+
   // whenever state variable update, react triggers a reconciliation cycle(re-renders the component)
-  console.log("Body Rendered");
+  console.log("Body Rendered", listOfRestaurants);
 
   useEffect(() => {
     fetchData();
@@ -24,7 +27,7 @@ const Body = () => {
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=30.3164945&lng=78.03219179999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
-    console.log(json);
+    // console.log(json);
 
     // optional chaining
     setListOfRestaurants(
@@ -94,13 +97,20 @@ const Body = () => {
           </button>
         </div>
       </div>
-      <div className="flex flex-wrap m-3 p-3 justify-center">
+      <div className="flex flex-wrap m-3 p-3 justify-start">
         {filteredRestaurants.map((restaurants) => (
           <Link
             key={restaurants.info.id}
             to={"/restaurant/" + restaurants.info.id}
           >
-            <RestaurantCard resData={restaurants} />
+            {
+              /* if the restaurant is promoted then add a promoted label to it */
+              restaurants.info.veg ? (
+                <RestaurantCardPromoted resData={restaurants}/>
+              ) : (
+                <RestaurantCard resData={restaurants} />
+              )
+            }
           </Link>
         ))}
       </div>
