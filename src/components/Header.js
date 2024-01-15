@@ -11,7 +11,7 @@ const Header = () => {
   return (
     <div className="flex justify-between bg-pink-100 shadow-lg sm:bg-yellow-200 lg:bg-green-200">
       <div className="logo-container"> 
-        <img className="w-56" src={LOGO_URL} /> 
+        <img className="w-52" src={LOGO_URL} /> 
       </div> 
       <div className="nav-items flex items-center ">
         <ul className=" flex m-4 p-4 items-center">
