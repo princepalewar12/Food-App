@@ -8,6 +8,10 @@ import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 import UserContext from "./ulits/UserContext";
+import { Provider } from "react-redux";
+import appStore from "./ulits/appStore";
+import Cart from "./components/Cart";
+
 // import Grocery from "./components/Grocery";
 
 // React.createElement => ReactElement-JS object => HTMLElement(render)
@@ -32,17 +36,19 @@ const AppLayout = () => {
     setUserName(data.name);
   }, []);
   return (
-    // Default User
-    <UserContext.Provider value={{ loggedInUser: "Elon Musk" }}>
-      {/* Context value=> Elon Musk*/}
-      <div className="app">
-        <UserContext.Provider value={{ loggedInUser: userName }}>
-          {/*Context value=> Prince Palewar*/}
-          <Header />
-        </UserContext.Provider>
-        <Outlet />
-      </div>
-    </UserContext.Provider>
+    <Provider store={appStore}>
+      {/*  Default User */}
+      <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+        {/* Context value=> Elon Musk*/}
+        <div className="app">
+          <UserContext.Provider value={{ loggedInUser: "Elon Musk" }}>
+            {/*Context value=> Prince Palewar*/}
+            <Header />
+          </UserContext.Provider>
+          <Outlet />
+        </div>
+      </UserContext.Provider>
+    </Provider>
   );
 };
 
@@ -70,6 +76,10 @@ const appRouter = createBrowserRouter([
             <Grocery />
           </Suspense>
         ),
+      },
+      {
+        path: "/cart",
+        element: <Cart/>,
       },
       {
         path: "/restaurant/:resId",

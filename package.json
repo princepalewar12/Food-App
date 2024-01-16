@@ -21,20 +21,22 @@
     "url": "https://github.com/princepalewar12/Food-App/issues"
   },
   "homepage": "https://github.com/princepalewar12/Food-App#readme",
-    "devDependencies": {
-      "assert": "^2.1.0",
-      "buffer": "^6.0.3",
-      "parcel": "^2.10.3",
-      "postcss": "^8.4.33",
-      "process": "^0.11.10",
-      "tailwindcss": "^3.4.1"
-    },
-    "dependencies": {
-      "react": "^18.2.0",
-      "react-dom": "^18.2.0",
-      "react-router-dom": "^6.21.1",
-      "react-scripts": "^5.0.1"
-    },
+  "devDependencies": {
+    "assert": "^2.1.0",
+    "buffer": "^6.0.3",
+    "parcel": "^2.10.3",
+    "postcss": "^8.4.33",
+    "process": "^0.11.10",
+    "tailwindcss": "^3.4.1"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^9.1.0",
+    "react-router-dom": "^6.21.1",
+    "react-scripts": "^5.0.1"
+  },
   "browserslist": [
     "last 2 versions"
   ]

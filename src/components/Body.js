@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 // import resList from "../ulits/mockData";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../ulits/useOnlineStatus";
 import { withPromotedLabel } from "./RestaurantCard";
+import userContext from "../ulits/UserContext";
 
 const Body = () => {
   // local state variable - super powerful variable
@@ -21,7 +22,7 @@ const Body = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);    
+  }, []);
   const fetchData = async () => {
     const data = await fetch(
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=30.3164945&lng=78.03219179999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
@@ -45,6 +46,8 @@ const Body = () => {
 
   if (onlineStatus === false)
     return <h1>Looks like you are Offline!! Please check your internet</h1>;
+
+  const { loggedInUser, setUserName } = useContext(userContext);
 
   // conditional rendering
   // if(listOfRestaurants.length === 0) {
@@ -96,6 +99,17 @@ const Body = () => {
             Search
           </button>
         </div>
+        <div className="m-4 p-4 flex item-center justify-center ">
+          <label htmlFor="user-name" className="text-2xl pt-1 me-2">
+            User Name:
+          </label>
+          <input
+            className="border border-black p-2"
+            type="text"
+            value={loggedInUser}
+            onChange={(e) => setUserName(e.target.value)}
+          />
+        </div>
       </div>
       <div className="flex flex-wrap m-3 p-3 justify-start">
         {filteredRestaurants.map((restaurants) => (
@@ -106,7 +120,7 @@ const Body = () => {
             {
               /* if the restaurant is promoted then add a promoted label to it */
               restaurants.info.veg ? (
-                <RestaurantCardPromoted resData={restaurants}/>
+                <RestaurantCardPromoted resData={restaurants} />
               ) : (
                 <RestaurantCard resData={restaurants} />
               )
