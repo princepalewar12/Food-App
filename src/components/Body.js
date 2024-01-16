@@ -17,11 +17,11 @@ const Body = () => {
   const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
 
   // whenever state variable update, react triggers a reconciliation cycle(re-renders the component)
-  console.log("Body Rendered", listOfRestaurants);
+  // console.log("Body Rendered");
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, []);    
   const fetchData = async () => {
     const data = await fetch(
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=30.3164945&lng=78.03219179999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
