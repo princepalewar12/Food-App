@@ -4,14 +4,16 @@ import { CDN_URL } from "../ulits/constants";
 
 const RestaurantCard = (props) => {
   const { resData } = props;
+  console.log(resData);
   const {loggedInUser} =useContext(userContext)
   const { cloudinaryImageId, name, cuisines, costForTwo, avgRating } =
     resData?.info;
   const { deliveryTime } = resData?.info?.sla;
   return (
-    <div className=" rounded-lg my-3 mx-9 pt-2 px-3 w-[250px] h-[500px] hover:border-2">
+    <div data-testid="resCard" className=" rounded-lg my-3 mx-9 pt-2 px-3 w-[250px] h-[500px] hover:border-2">
       <img
         className="rounded-lg"
+
         style={{ width: "100%", height: "200px" }}
         src={CDN_URL + cloudinaryImageId}
         alt="res-photo"

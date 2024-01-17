@@ -65,3 +65,19 @@ import {Component} from "path";
  - Dispatch(Action)
  - selector
     
+# Types of testing (Developer)
+ - Unit Testing
+ - Integration testing
+ - End To End Testing => e2e Testing
+
+# Setting up Testing in our App
+ - Install React Testing Library
+ - Install jest
+ - Install babel dependencies
+ - Configure Babel
+ - Configure Parcel Config to disable default babel transpilation
+ - Jest - npx jest --init
+ - Install jsdom Library
+ - Install @babel/preset-react - to make JSX work in test cases
+ - Include @babel/preset-react inside my babel config
+ - npm install -D @testing-library/jest-dom
